@@ -8,6 +8,12 @@
 #  Skylar Olsen, PhD
 #  Zillow Senior Economist 
 #  2016-03-05
+#  Modified By
+#  Yongjie Ji, PhD
+#  Research Scientist 
+#  Center for Agricultural and Rural Development, Iowa State University 
+#  Modify Date: 2022-04-15
+#  Modify Goal: Apply medium to high confidence filter defined by 
 #####################################################################
 
 ## Preliminaries
@@ -31,14 +37,15 @@ options(scipen = 999) # Do not print scientific notation
 options(stringsAsFactors = FALSE) ## Do not load strings as factors
 
 # Change directory to where you've stored ZTRAX
-dir <- "//lyn-dmz-ana-013/g$/ZTRAX/DataExtract/ZTRAX_20160309"
+dir <- "g:/Zillow/20210405/19" #19: Iowa
+
 
 
 #  Pull in layout information
-layoutZAsmt <- read_excel(file.path(dir, 'layout.xlsx'), sheet = 1)
-layoutZTrans <- read_excel(file.path(dir, 'layout.xlsx'), 
-                           sheet = 2,
-                           col_types = c("text", "text", "numeric", "text", "text"))
+#layoutZAsmt <- read_excel(file.path(dir, 'layout.xlsx'), sheet = 1)
+#layoutZTrans <- read_excel(file.path(dir, 'layout.xlsx'), 
+#                           sheet = 2,
+#                           col_types = c("text", "text", "numeric", "text", "text"))
 
 
 
@@ -49,13 +56,13 @@ layoutZTrans <- read_excel(file.path(dir, 'layout.xlsx'),
 #############################################################################################################
 #############################################################################################################
 
-prototyping <- TRUE
+#prototyping <- TRUE
 
-if(prototyping){
-  rows2load <- 1000
-}else{
-  rows2load <- NULL
-}
+#if(prototyping){
+#  rows2load <- 1000
+#}else{
+#  rows2load <- NULL
+#}
 
 
 ######################################################################
@@ -65,9 +72,9 @@ if(prototyping){
 #    2) Building table
 #    3) BuildingAreas
 
-col_namesMain <- layoutZAsmt[layoutZAsmt$TableName == 'utMain', 'FieldName']
-col_namesBldg <- layoutZAsmt[layoutZAsmt$TableName == 'utBuilding', 'FieldName']
-col_namesBldgA <- layoutZAsmt[layoutZAsmt$TableName == 'utBuildingAreas', 'FieldName']
+AsmtMain     <- 'utMain'
+AsmtBuilding <- 'utBuilding'
+AsmtBuildingArea <- 'utBuildingAreas'
 
 ######################################################################
 # Pull address, geographic, lot size, and tax data from main table
